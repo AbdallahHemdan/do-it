@@ -56,8 +56,13 @@ $ npm run serve
 
 <div align="center" width="500px">
 
-
-
+![Annotation 2020-06-18 153433](https://user-images.githubusercontent.com/40190772/85026727-5301af80-b179-11ea-8087-762c2599638e.png)
+![Annotation 2020-06-18 152444](https://user-images.githubusercontent.com/40190772/85026732-5432dc80-b179-11ea-9407-a396d72e6d11.png)
+![Annotation 2020-06-18 152502](https://user-images.githubusercontent.com/40190772/85026735-54cb7300-b179-11ea-8061-fd975cfe356b.png)
+![Annotation 2020-06-18 152517](https://user-images.githubusercontent.com/40190772/85026740-55fca000-b179-11ea-9bcb-c434d5f37861.png)
+![Annotation 2020-06-18 152617](https://user-images.githubusercontent.com/40190772/85026742-56953680-b179-11ea-9fac-9db4dba31d55.png)
+![Annotation 2020-06-18 152729](https://user-images.githubusercontent.com/40190772/85026746-572dcd00-b179-11ea-9dc5-9c89f085f1ab.png)
+![Annotation 2020-06-18 152757](https://user-images.githubusercontent.com/40190772/85026751-57c66380-b179-11ea-8458-d31c2bd47df7.png)
 
 </div>
 
