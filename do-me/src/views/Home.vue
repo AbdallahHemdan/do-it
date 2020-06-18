@@ -21,16 +21,26 @@
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
           <li
-            :class="{ todo: true, completed: todo.completed }"
+            :class="{
+              todo: true,
+              completed: todo.completed,
+              editing: todo === editingTodo
+            }"
             v-for="(todo, index) in filteredTasks"
             :key="index"
           >
             <div class="view">
               <input class="toggle" type="checkbox" v-model="todo.completed" />
-              <label>{{ todo.title }}</label>
+              <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
               <button class="destroy" @click="removeTask(index)"></button>
             </div>
-            <input class="edit" type="text" />
+            <input
+              class="edit"
+              type="text"
+              v-model="todo.title"
+              @keyup.enter="editingIsDone"
+              @keyup.esc="cancleEditing"
+            />
           </li>
         </ul>
       </section>
@@ -84,13 +94,25 @@ let filters = {
     return todos.filter(todo => todo.completed);
   }
 };
+
+let todosLocalStorge = {
+  fetchTodos: function() {
+    return JSON.parse(localStorage.getItem("todos")) || [];
+  },
+  saveTodos: function(todos) {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+};
+
 export default {
   name: "Home",
   data: function() {
     return {
       newTodo: "",
-      todos: [],
-      visibility: "all"
+      todos: todosLocalStorge.fetchTodos(),
+      visibility: "all",
+      editingTodo: null,
+      oldTaskDescription: null
     };
   },
   methods: {
@@ -121,6 +143,20 @@ export default {
     },
     clearCompleted: function() {
       this.todos = this.todos.filter(todo => !todo.completed);
+    },
+    editTodo: function(todo) {
+      this.editingTodo = todo;
+      this.oldTaskDescription = todo.title;
+    },
+    editingIsDone: function() {
+      if (!this.editingTodo.title) {
+        this.removeTask(this.todos.indexOf(this.editingTodo));
+      }
+      this.editingTodo = null;
+    },
+    cancleEditing: function() {
+      this.editingTodo.title = this.oldTaskDescription;
+      this.editingTodo = null;
     }
   },
   computed: {
@@ -142,6 +178,14 @@ export default {
           return (todo.completed = value);
         });
       }
+    }
+  },
+  watch: {
+    todos: {
+      handler: function(todos) {
+        todosLocalStorge.saveTodos(this.todos);
+      },
+      deep: true
     }
   }
 };
