@@ -2,7 +2,7 @@
   <div class="home">
     <section class="todoapp">
       <header class="header">
-        <h1>todo me</h1>
+        <h1>do me</h1>
         <input
           class="new-todo"
           autocomplete="off"
