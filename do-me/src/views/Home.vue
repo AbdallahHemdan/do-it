@@ -16,7 +16,7 @@
           class="toggle-all"
           id="toggle-all"
           type="checkbox"
-          @click="toggleAllTasks"
+          v-model="allIsDone"
         />
         <label for="toggle-all">Mark all as complete</label>
         <ul class="todo-list">
@@ -98,12 +98,13 @@ export default {
       this.todos.splice(indexOfTaskToRemove, 1);
     },
     toggleAllTasks: function() {
+      let isActiveExists = !!filters.active(this.todos).length;
       for (
         let indexOfTodo = 0;
         indexOfTodo < this.todos.length;
         indexOfTodo++
       ) {
-        this.todos[indexOfTodo].completed ^= 1;
+        this.todos[indexOfTodo].completed = isActiveExists;
       }
     },
     addNewTask: function() {
@@ -125,13 +126,22 @@ export default {
   computed: {
     leftTasks: function() {
       return filters.active(this.todos).length;
-      return itemsLeft;
     },
     filteredTasks: function() {
       return filters[this.visibility](this.todos);
     },
     itemText: function() {
       return filters.active(this.todos).length > 1 ? "items" : "item";
+    },
+    allIsDone: {
+      get: function() {
+        return this.leftTasks === 0;
+      },
+      set: function(value) {
+        this.todos.forEach(todo => {
+          return (todo.completed = value);
+        });
+      }
     }
   }
 };
