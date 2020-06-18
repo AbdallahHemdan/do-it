@@ -200,4 +200,7 @@ export default {
 .filters li {
   cursor: pointer;
 }
+.todo-icon {
+  width: 50px;
+}
 </style>
